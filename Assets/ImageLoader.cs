@@ -6,12 +6,30 @@ using UnityEngine.UI;
 
 public class ImageLoader : MonoBehaviour {
 
-	public AssetReferenceSprite imageToLoad;
+	public Slider downloadProgressBar;
 
-	void Start () {
-		imageToLoad.LoadAsset().Completed += (op) =>
+	private void Start()
+	{
+		StartCoroutine(DownloadAsset("bg2"));
+	}
+
+	IEnumerator DownloadAsset(string assetName)
+	{
+		var operation = Addressables.LoadAsset<Sprite>(assetName);
+		StartCoroutine(ShowProgress(operation));
+		operation.Completed += assign =>
 		{
-			GetComponent<Image>().sprite = op.Result;
+			GetComponent<Image>().sprite = assign.Result;
 		};
+		yield return null;
+	}
+
+	IEnumerator ShowProgress(UnityEngine.ResourceManagement.IAsyncOperation<Sprite> op)
+	{
+		while(!op.IsDone)
+		{
+			downloadProgressBar.value = op.PercentComplete;
+			yield return new WaitForEndOfFrame();
+		}
 	}
 }

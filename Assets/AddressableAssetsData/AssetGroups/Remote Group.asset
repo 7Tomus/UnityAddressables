@@ -16,8 +16,8 @@ MonoBehaviour:
     m_serializedData: []
   m_guid: 11ddffa6ffd7ae94288d27db189e808d
   m_serializeEntries:
-  - m_guid: 7cad73bf7d1179045aaf8496c2d15953
-    m_address: bg1
+  - m_guid: 8df96be616fb2884da8b6f89131ce99c
+    m_address: Assets/Resources_moved/bg2.png
     m_readOnly: 0
     m_serializedLabels: []
   m_readOnly: 0
